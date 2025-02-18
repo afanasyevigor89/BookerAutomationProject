@@ -22,7 +22,7 @@ public class GetBookingByIdTest {
 
     @Test
     public void testBookingById() throws Exception {
-        Response response = apiClient.getBookingById();
+        Response response = apiClient.getBookingById(144);
 
         //Проверяем статус-код ответа
         assertThat(response.getStatusCode()).isEqualTo(200);
@@ -34,13 +34,13 @@ public class GetBookingByIdTest {
         assertThat(bookingId).isNotNull();
 
         //Проверяем соответствия значений
-        assertThat(bookingId.firstname).isEqualTo("John");
-        assertThat(bookingId.lastname).isEqualTo("Smith");
+        assertThat(bookingId.firstname).isEqualTo("Josh");
+        assertThat(bookingId.lastname).isEqualTo("Allen");
         assertThat(bookingId.totalprice).isEqualTo(111);
         assertThat(bookingId.depositpaid).isTrue();
         assertThat(bookingId.bookingdates.checkin).isEqualTo("2018-01-01");
         assertThat(bookingId.bookingdates.checkout).isEqualTo("2019-01-01");
-        assertThat(bookingId.additionalneeds).isEqualTo("Breakfast");
+        assertThat(bookingId.additionalneeds).isEqualTo("super bowls");
 
     }
 }

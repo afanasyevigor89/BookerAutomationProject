@@ -3,7 +3,6 @@ package core.clients;
 import core.settings.ApiEndpoints;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSenderOptions;
 import io.restassured.specification.RequestSpecification;
 
 import java.io.IOException;
@@ -65,10 +64,11 @@ public class APIClient {
                 .response();
     }
 
-    public Response getBookingById() {
+    public Response getBookingById(int id) {
         return  getRequestSpec()
                 .when()
-                .get(ApiEndpoints.BOOKINGID.getPath())
+                .pathParam("id", id)
+                .get(ApiEndpoints.BOOKING.getPath() + "/{id}")
                 .then()
                 .statusCode(200)
                 .extract()
