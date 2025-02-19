@@ -15,10 +15,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
 
     //RestAssured
-    testImplementation 'io.rest-assured:rest-assured:5.5.0'
+    implementation 'io.rest-assured:rest-assured:5.5.0'
 
     //JSON parser for handling JSON responses
-    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
 
     //AssertJ for better assertions
     testImplementation 'org.assertj:assertj-core:3.27.3'
