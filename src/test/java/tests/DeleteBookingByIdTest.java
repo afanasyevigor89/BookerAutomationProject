@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DeleteBookingByIdTest {
     private APIClient apiClient;
     private ObjectMapper objectMapper;
-    private int ferstId;
+    private int firstId;
 
     @BeforeEach
     public void setUp() {
@@ -42,14 +42,14 @@ public class DeleteBookingByIdTest {
         assertThat(bookings).isNotEmpty();
 
         //Получаем первое значение элемента в списке
-        ferstId = bookings.getFirst().getBookingid();
-        assertThat(ferstId).isGreaterThan(0);
+        firstId = bookings.getFirst().getBookingid();
+        assertThat(firstId).isGreaterThan(0);
     }
 
     @Test
     @Order(2)
     public void testDeleteBookingById() throws Exception {
-        Response response = apiClient.deleteBookingById(ferstId);
+        Response response = apiClient.deleteBookingById(firstId);
 
         //Проверяем что статус код ответа равен 201
         assertThat(response.getStatusCode()).isEqualTo(201);
@@ -58,7 +58,7 @@ public class DeleteBookingByIdTest {
     @Test
     @Order(3)
     public void testCheckDeleteId() throws Exception {
-        Response response = apiClient.getBookingById(ferstId);
+        Response response = apiClient.getBookingById(firstId);
 
         //Проверяем что статус код ответа равен 404
         assertThat(response.getStatusCode()).isEqualTo(404);
