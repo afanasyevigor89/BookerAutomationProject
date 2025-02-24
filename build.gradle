@@ -23,6 +23,11 @@ dependencies {
     //AssertJ for better assertions
     testImplementation 'org.assertj:assertj-core:3.27.3'
 
+    //Allure
+    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.29.0'
+
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+
 }
 
 test {
