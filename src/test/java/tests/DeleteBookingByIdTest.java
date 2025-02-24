@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.clients.APIClient;
 import core.models.Booking;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
@@ -11,6 +15,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Epic("Работа с данными")
+@Feature("Удаление бронирования")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class) // Метод для последовательного запуска тестов
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) // Один экземпляр класса для всех тестов
 public class DeleteBookingByIdTest {
@@ -26,6 +32,8 @@ public class DeleteBookingByIdTest {
 
     }
 
+    @Story("Получение списка бронирований")
+    @Description("Получение списка, сохранение первого id в списке")
     @Test
     @Order(1)
     public void testGetBookingId() throws Exception {
@@ -46,6 +54,7 @@ public class DeleteBookingByIdTest {
         assertThat(firstId).isGreaterThan(0);
     }
 
+    @Story("Удаление бронирования с ранее полученным id")
     @Test
     @Order(2)
     public void testDeleteBookingById() throws Exception {
@@ -55,6 +64,8 @@ public class DeleteBookingByIdTest {
         assertThat(response.getStatusCode()).isEqualTo(201);
     }
 
+    @Story("Проверка что бронирование удалено")
+    @Description("Получение бронирования по id")
     @Test
     @Order(3)
     public void testCheckDeleteId() throws Exception {

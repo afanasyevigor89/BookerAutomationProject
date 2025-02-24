@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import core.clients.APIClient;
 import core.models.Booking;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +16,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Epic("Работа с данными")
+@Feature("Получение информации о бронированиях")
 public class GetBookingTest {
     private APIClient apiClient;
     private ObjectMapper objectMapper;
@@ -23,6 +29,8 @@ public class GetBookingTest {
         objectMapper = new ObjectMapper();
     }
 
+    @Story("Получение списка бронирований")
+    @Description("Получение данных списка бронирований на странице 1")
     @Test
     public void testGetBooking() throws Exception {
         //Выполняется запрос к эндпойту /booking через APIClient

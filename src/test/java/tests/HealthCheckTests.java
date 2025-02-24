@@ -1,12 +1,15 @@
 package tests;
 
 import core.clients.APIClient;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Epic("Проверка отклика API")
 public class HealthCheckTests {
     private APIClient apiClient;
 
@@ -16,7 +19,7 @@ public class HealthCheckTests {
         apiClient = new APIClient();
     }
 
-    //Тест на метод ping
+    @Story("Тест на метод ping")
     @Test
     public void testPing() {
         //Выполняем GET запрос на /ping через APIClient
