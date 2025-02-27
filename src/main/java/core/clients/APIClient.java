@@ -125,4 +125,39 @@ public class APIClient {
                 .response();
     }
 
+    public Response createBooking(String newBooking) {
+        return  getRequestSpec()
+                .body(newBooking)
+                .log().all()
+                .when()
+                .post(ApiEndpoints.BOOKING.getPath())
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response updateBooking(int id, String updateBooking) {
+        return  getRequestSpec()
+                .pathParam("id", id)
+                .body(updateBooking)
+                .log().all()
+                .when()
+                .put(ApiEndpoints.BOOKING.getPath() + "/{id}")
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response updateFieldBooking(int id, String newUpdateFieldBooking) {
+        return  getRequestSpec()
+                .pathParam("id", id)
+                .body(newUpdateFieldBooking)
+                .log().all()
+                .when()
+                .patch(ApiEndpoints.BOOKING.getPath() + "/{id}")
+                .then()
+                .extract()
+                .response();
+    }
+
 }
