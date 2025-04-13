@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Epic("Работа с данными")
@@ -33,20 +34,20 @@ public class GetBookingTest {
     @Description("Получение данных списка бронирований на странице 1")
     @Test
     public void testGetBooking() throws Exception {
-        //Выполняется запрос к эндпойту /booking через APIClient
+        step("Выполняется запрос к эндпойту /booking через APIClient");
         Response response = apiClient.getBooking();
 
-        //Проверяем что статус код ответа равен 200
+        step("Проверяем что статус код ответа равен 200");
         assertThat(response.getStatusCode()).isEqualTo(200);
 
-        //Десериализуем тело ответа в список объектов Booking
+        step("Десериализуем тело ответа в список объектов Booking");
         String responseBody = response.getBody().asString();
         List<Booking> bookings = objectMapper.readValue(responseBody, new TypeReference<List<Booking>>() {});
 
-        //Проверяем, что тело ответа содержит Booking
+        step("Проверяем, что тело ответа содержит Booking");
         assertThat(bookings).isNotEmpty();
 
-        //Проверяем, что каждый объект содержит значение bookingid
+        step("Проверяем, что каждый объект содержит значение bookingid");
         for (Booking booking : bookings) {
             assertThat(booking.getBookingid()).isGreaterThan(0);
         }

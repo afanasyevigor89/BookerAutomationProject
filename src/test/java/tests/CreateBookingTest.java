@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.*;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,18 +43,18 @@ public class CreateBookingTest {
     @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testCreateBooking() throws Exception {
-        //Выполняем запрос к эндпойнту /booking через APIClient
+        step("Выполняем запрос к эндпойнту /booking через APIClient");
         objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(newBooking);
         Response response = apiClient.createBooking(requestBody);
 
-        //Проверяем, что статус-код ответа 200
+        step("Проверяем, что статус-код ответа 200");
         assertThat(response.getStatusCode()).isEqualTo(200);
 
-        //Десериализуем тело ответа в объект Booking
+        step("Десериализуем тело ответа в объект Booking");
         createdBooking = objectMapper.readValue(response.getBody().asString(), CreatedBooking.class);
 
-        //Проверяем что тело ответа содержит объект нового бронирования
+        step("Проверяем что тело ответа содержит объект нового бронирования");
         assertThat(createdBooking).isNotNull();
         assertEquals(newBooking.getFirstname(), createdBooking.getBooking().getFirstname());
         assertEquals(newBooking.getLastname(), createdBooking.getBooking().getLastname());
@@ -66,11 +67,11 @@ public class CreateBookingTest {
     @Description("Удаление ранее созданного бронирования")
     @AfterEach
     public void tearDown() {
-        //Удаляем созданное бронирование
+        step("Удаляем созданное бронирование");
         apiClient.createToken("admin", "password123");
         apiClient.deleteBookingById(createdBooking.getBookingid());
 
-        //Проверяем, что бронирование успешно удалено
+        step("Проверяем, что бронирование успешно удалено");
         assertThat(apiClient.getBookingById(createdBooking.getBookingid()).getStatusCode()).isEqualTo(404);
     }
 }
